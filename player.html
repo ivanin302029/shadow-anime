@@ -2,91 +2,25 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ anime.titre }} — Shadow Anime</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='player.css') }}">
-    
     <style>
-        /* Défilement général de votre site */
-        html, body {
-            background-color: #11141a !important;
-            color: white !important;
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            overflow-y: auto;
-            min-height: 100vh;
-        }
-
-        /* ==========================================================
-           AJOUT REQUIS : ROULETTE AUTONOME JUSTE À CÔTÉ DE FRANIME
-           ========================================================== */
-        .shadow-player {
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: #1e222b; 
-            padding: 15px; 
-            border-radius: 8px; 
-            margin: 20px auto; 
-            width: 100%; 
-            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-        }
-
-        .video-wrapper {
-            width: 100%; 
-            aspect-ratio: 16 / 9; 
-            overflow-y: auto !important; /* Force l'apparition de la glisse (roulette) à l'endroit encerclé */
-            position: relative;
-            border-radius: 4px;
-            background: #000;
-        }
-
-        /* Design personnalisé de la roulette à l'endroit encerclé */
-        .video-wrapper::-webkit-scrollbar {
-            width: 10px;
-        }
-        .video-wrapper::-webkit-scrollbar-track {
-            background: #1e222b;
-        }
-        .video-wrapper::-webkit-scrollbar-thumb {
-            background: #ff4757; /* Barrettes de glisse rouge Shadow Anime */
-            border-radius: 5px;
-            border: 2px solid #1e222b;
-        }
-        .video-wrapper::-webkit-scrollbar-thumb:hover {
-            background: #e03d4b;
-        }
+        html, body { background-color: #11141a !important; color: white !important; margin: 0; padding: 0; font-family: 'Arial', sans-serif; overflow-y: auto; min-height: 100vh; }
+        .shadow-player { display: flex; justify-content: center; align-items: center; background: #1e222b; padding: 15px; border-radius: 8px; margin: 20px auto; width: 95%; max-width: 950px; }
+        .video-wrapper { width: 100%; aspect-ratio: 16 / 9; overflow-y: auto !important; position: relative; border-radius: 4px; background: #000; }
+        .video-wrapper::-webkit-scrollbar { width: 10px; }
+        .video-wrapper::-webkit-scrollbar-track { background: #1e222b; }
+        .video-wrapper::-webkit-scrollbar-thumb { background: #ff4757; border-radius: 5px; }
     </style>
 </head>
-<body class="player-page">
-
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="logo">SHADOW<span>ANIME</span></div>
-        <nav>
-            <a href="/">Accueil</a>
-            <a href="/">Catalogue</a>
-        </nav>
-    </nav>
-
-    <main class="player-container" style="max-width: 1000px; margin: 0 auto; padding: 20px;">
-        <a href="/" class="back-button" style="color: #ff4757; text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 20px;">← Retour au catalogue</a>
-
-        <section class="anime-header" style="text-align: left; margin-bottom: 15px;">
-            <div>
-                <p class="anime-small-title" style="color: #ff4757; font-size: 12px; margin: 0; font-weight: bold; text-transform: uppercase;">SHADOW ANIME</p>
-                <h1 style="margin: 5px 0 0 0; font-size: 32px;">{{ anime.titre }}</h1>
-                <p class="episode-title" style="color: #1e90ff; margin: 5px 0 0 0; font-weight: bold;">Épisode {{ episode_actuel.numero }}</p>
-            </div>
-        </section>
-
-        <!-- ZONE DU LECTEUR EN IFRAME FLUIDE AVEC DOUBLE ROULETTE -->
+<body>
+    <div style="padding: 20px; text-align: center;">
+        <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold;">← Retour au catalogue</a>
+        <h1 style="margin-top: 10px;">{{ anime.titre }}</h1>
+        <p style="color: #1e90ff; font-weight: bold;">Épisode {{ anime.episode_numero }}</p>
+        
         <section class="shadow-player">
             <div class="video-wrapper">
                 {% if lien_video %}
-                    <!-- Sandbox filtré : neutralise l'affichage de l'alerte d'avertissement de piratage -->
                     <iframe 
                         src="{{ lien_video }}" 
                         scrolling="yes" 
@@ -101,12 +35,6 @@
                 {% endif %}
             </div>
         </section>
-
-    </main>
-
-    <footer class="footer" style="margin-top: 50px; padding: 20px; color: #a4b0be; font-size: 13px; text-align: center;">
-        <p>© 2026 shadow-anime.fr</p>
-    </footer>
-
+    </div>
 </body>
 </html>

@@ -3,15 +3,14 @@ from flask import Flask, render_template_string
 app = Flask(__name__)
 
 CATALOGUE_ANIMES = [
-    {"id": 1, "titre": "Chainsaw Man", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://franime.fr"},
-    {"id": 2, "titre": "One Piece", "image": "https://unsplash.com", "episode_numero": "1100", "lien": "https://franime.fr"},
-    {"id": 3, "titre": "Naruto", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://franime.fr"},
-    {"id": 4, "titre": "Solo Leveling", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://franime.fr"},
-    {"id": 5, "titre": "That Time I Got Reincarnated as a Slime", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://franime.fr"},
-    {"id": 6, "titre": "Re:Zero", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://franime.fr"}
+    {"id": 1, "titre": "Chainsaw Man", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://zencdn.net"},
+    {"id": 2, "titre": "One Piece", "image": "https://unsplash.com", "episode_numero": "1100", "lien": "https://zencdn.net"},
+    {"id": 3, "titre": "Naruto", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://zencdn.net"},
+    {"id": 4, "titre": "Solo Leveling", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://zencdn.net"},
+    {"id": 5, "titre": "That Time I Got Reincarnated as a Slime", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://zencdn.net"},
+    {"id": 6, "titre": "Re:Zero", "image": "https://unsplash.com", "episode_numero": "1", "lien": "https://zencdn.net"}
 ]
 
-# Modèle de la page d'accueil sombre
 HTML_ACCUEIL = """
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,10 +20,10 @@ HTML_ACCUEIL = """
 </head>
 <body style="background-color: #11141a; color: white; font-family: Arial, sans-serif; text-align: center; padding: 40px; margin: 0;">
     <h1 style="color: #ff4757; font-size: 42px; margin-bottom: 30px;">SHADOW ANIME</h1>
-    <p style="color: #a4b0be; margin-bottom: 40px;">Votre catalogue de streaming gratuit en ligne</p>
+    <p style="color: #a4b0be; margin-bottom: 40px;">Votre catalogue de streaming gratuit en ligne (ANMX-Style)</p>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1200px; margin: 0 auto;">
         {% for anime in animes %}
-        <a href="/video/{{ anime.id }}" style="text-decoration: none; color: white; background: #1e222b; padding: 15px; border-radius: 8px; width: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); transition: transform 0.2s;">
+        <a href="/video/{{ anime.id }}" style="text-decoration: none; color: white; background: #1e222b; padding: 15px; border-radius: 8px; width: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
             <img src="{{ anime.image }}" style="width: 100%; border-radius: 6px; aspect-ratio: 2/3; object-fit: cover;">
             <h3 style="font-size: 16px; margin: 12px 0 5px 0; text-align: left; height: 40px; overflow: hidden;">{{ anime.titre }}</h3>
         </a>
@@ -34,7 +33,6 @@ HTML_ACCUEIL = """
 </html>
 """
 
-# Modèle du grand Shadow Player avec roulette (scroll) active
 HTML_PLAYER = """
 <!DOCTYPE html>
 <html lang="fr">
@@ -58,17 +56,8 @@ HTML_PLAYER = """
         
         <section class="shadow-player">
             <div class="video-wrapper">
-                <iframe 
-                    src="{{ lien_video }}" 
-                    scrolling="yes" 
-                    frameborder="0" 
-                    width="100%" 
-                    height="140%" 
-                    sandbox="allow-scripts allow-same-origin allow-forms"
-                    allowfullscreen="true" 
-                    allow="autoplay; fullscreen"
-                    style="width: 100%; height: 140%; border: none;">
-                </iframe>
+                <!-- Chargement direct via ton propre lecteur vidéo indépendant d'AnimeX -->
+                <video src="{{ lien_video }}" controls autoplay muted width="100%" height="100%" style="display: block; background: #000; border: none; outline: none;"></video>
             </div>
         </section>
     </div>

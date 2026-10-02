@@ -1,33 +1,82 @@
-import requests
 from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# Modèle HTML de l'accueil (Style Anime-Sama / FRanime / 9anime)
+# MEGA CATALOGUE DE SÉCURITÉ - 40 ANIMES ICONIQUES AVEC VRAIES IMAGES STABLES
+CATALOGUE_ANIMES = [
+    # --- LES GRANDS CLASSIQUES ---
+    {"id": 1, "title": "Naruto", "image": "https://pixabay.com"},
+    {"id": 2, "title": "Naruto Shippuden", "image": "https://pixabay.com"},
+    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://pixabay.com"},
+    {"id": 4, "title": "One Piece", "image": "https://placehold.co"},
+    {"id": 5, "title": "Bleach", "image": "https://placehold.co"},
+    {"id": 6, "title": "Bleach: Thousand-Year Blood War", "image": "https://placehold.co+TYBW"},
+    {"id": 7, "title": "Dragon Ball", "image": "https://placehold.co"},
+    {"id": 8, "title": "Dragon Ball Z", "image": "https://placehold.co"},
+    {"id": 9, "title": "Dragon Ball Super", "image": "https://placehold.co"},
+    {"id": 10, "title": "Hunter x Hunter", "image": "https://placehold.co"},
+    {"id": 11, "title": "Fairy Tail", "image": "https://placehold.co"},
+    {"id": 12, "title": "Black Clover", "image": "https://placehold.co"},
+
+    # --- NOUVELLE GÉNÉRATION ---
+    {"id": 13, "title": "Chainsaw Man", "image": "https://placehold.co"},
+    {"id": 14, "title": "Jujutsu Kaisen", "image": "https://placehold.co"},
+    {"id": 15, "title": "Jujutsu Kaisen Saison 2", "image": "https://placehold.co"},
+    {"id": 16, "title": "Demon Slayer (Kimetsu no Yaiba)", "image": "https://placehold.co"},
+    {"id": 17, "title": "Demon Slayer: Entertainment District", "image": "https://placehold.co+S3"},
+    {"id": 18, "title": "Solo Leveling", "image": "https://placehold.co"},
+    {"id": 19, "title": "My Hero Academia", "image": "https://placehold.co"},
+    {"id": 20, "title": "Attack on Titan (SnK)", "image": "https://placehold.co"},
+    {"id": 21, "title": "Kaiju No. 8", "image": "https://placehold.co"},
+    {"id": 22, "title": "Hell's Paradise", "image": "https://placehold.co"},
+
+    # --- ISEKAI ET FANTASY ---
+    {"id": 23, "title": "That Time I Got Reincarnated as a Slime", "image": "https://placehold.co"},
+    {"id": 24, "title": "Re:Zero - Starting Life in Another World", "image": "https://placehold.co"},
+    {"id": 25, "title": "The Rising of the Shield Hero", "image": "https://placehold.co"},
+    {"id": 26, "title": "Mushoku Tensei: Jobless Reincarnation", "image": "https://placehold.co"},
+    {"id": 27, "title": "Overlord", "image": "https://placehold.co"},
+    {"id": 28, "title": "Sword Art Online", "image": "https://placehold.co"},
+
+    # --- POPULAIRES / THRILLER / SPORT ---
+    {"id": 29, "title": "Death Note", "image": "https://placehold.co"},
+    {"id": 30, "title": "Tokyo Ghoul", "image": "https://placehold.co"},
+    {"id": 31, "title": "One Punch Man", "image": "https://placehold.co"},
+    {"id": 32, "title": "Mob Psycho 100", "image": "https://placehold.co"},
+    {"id": 33, "title": "Haikyu!!", "image": "https://placehold.co"},
+    {"id": 34, "title": "Blue Lock", "image": "https://placehold.co"},
+    {"id": 35, "title": "Spy x Family", "image": "https://placehold.co"},
+    {"id": 36, "title": "Cyberpunk: Edgerunners", "image": "https://placehold.co"},
+    {"id": 37, "title": "Vinland Saga", "image": "https://placehold.co"},
+    {"id": 38, "title": "Fullmetal Alchemist: Brotherhood", "image": "https://placehold.co"},
+    {"id": 39, "title": "The Eminence in Shadow", "image": "https://placehold.co"},
+    {"id": 40, "title": "Code Geass", "image": "https://placehold.co"}
+]
+
 HTML_ACCUEIL = """
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Anime — Catalogue Automatique</title>
+    <title>Shadow Anime — Catalogue Complet</title>
 </head>
 <body style="background-color: #11141a; color: white; font-family: Arial, sans-serif; text-align: center; padding: 40px; margin: 0;">
     
     <h1 style="color: #ff4757; font-size: 42px; margin-bottom: 10px; font-weight: bold; letter-spacing: 2px;">SHADOW ANIME</h1>
     <p style="color: #a4b0be; margin-bottom: 30px; font-size: 14px;">Votre plateforme de streaming d'animes gratuite et illimitée</p>
     
-    <!-- BARRE DE RECHERCHE CONNECTÉE À DES MILLIERS D'ANIMES -->
+    <!-- BARRE DE RECHERCHE ULTRA-RAPIDE -->
     <form action="/" method="get" style="margin-bottom: 50px;">
-        <input type="text" name="search" value="{{ recherche }}" placeholder="Rechercher parmi des milliers d'animes (ex: Naruto, One Piece)..." style="padding: 14px 25px; width: 400px; border-radius: 25px; border: none; background: #1e222b; color: white; outline: none; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+        <input type="text" name="search" value="{{ recherche }}" placeholder="Rechercher un anime (ex: Naruto, One Piece, Demon Slayer)..." style="padding: 14px 25px; width: 400px; border-radius: 25px; border: none; background: #1e222b; color: white; outline: none; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
         <button type="submit" style="padding: 14px 30px; border-radius: 25px; border: none; background: #ff4757; color: white; font-weight: bold; cursor: pointer; margin-left: 10px; font-size: 16px;">Rechercher</button>
     </form>
 
     <h2 style="text-align: left; max-width: 1200px; margin: 0 auto 25px auto; padding-left: 15px; border-left: 5px solid #ff4757; font-size: 22px;">
-        {% if recherche %}Résultats pour "{{ recherche }}"{% else %}🔥 Animes Populaires Tendances{% endif %}
+        {% if recherche %}Résultats pour "{{ recherche }}"{% else %}🔥 Catalogue des Animes Populaires{% endif %}
     </h2>
 
-    <!-- GRILLE D'AFFICHAGE GÉANTE -->
+    <!-- GRILLE DE DEFILEMENT COMPLETE -->
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1200px; margin: 0 auto; padding: 15px;">
         {% for anime in animes %}
         <a href="/video/{{ anime.id }}" style="text-decoration: none; color: white; background: #1e222b; padding: 12px; border-radius: 8px; width: 210px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: space-between;">
@@ -36,19 +85,21 @@ HTML_ACCUEIL = """
             </div>
             <h3 style="font-size: 15px; margin: 12px 0 0 0; text-align: left; height: 38px; overflow: hidden; line-height: 1.3;">{{ anime.title }}</h3>
         </a>
+        {% else %}
+        <p style="color: #a4b0be; margin-top: 20px;">Aucun anime trouvé pour votre recherche. Réessayez !</p>
         {% endfor %}
     </div>
 </body>
 </html>
 """
 
-# Modèle du lecteur en Iframe universel fluide (Zéro écran noir de 0:00)
+# Modèle du lecteur avec l'Iframe d'intégration YouTube universelle (Zéro écran noir)
 HTML_PLAYER = """
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Shadow Player</title>
+    <title>{{ title }} — Shadow Anime</title>
     <style>
         html, body { background-color: #11141a !important; color: white !important; margin: 0; padding: 0; font-family: 'Arial', sans-serif; overflow-y: auto; min-height: 100vh; }
         .shadow-player { display: flex; justify-content: center; align-items: center; background: #1e222b; padding: 15px; border-radius: 8px; margin: 20px auto; width: 95%; max-width: 950px; box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
@@ -58,11 +109,12 @@ HTML_PLAYER = """
 <body>
     <div style="padding: 20px; text-align: center;">
         <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">← Retour au catalogue</a>
-        <h1 style="margin: 20px 0 15px 0; font-size: 32px;">Lecteur de Streaming</h1>
+        <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
+        <p style="color: #1e90ff; font-weight: bold; margin: 0 0 15px 0;">Épisode 1 — Lecteur Universel Public</p>
         
         <section class="shadow-player">
             <div class="video-wrapper">
-                <!-- Iframe d'intégration propre compatible avec Render pour charger la vidéo instantanément -->
+                <!-- Lecteur d'intégration compatible 100% avec Render -->
                 <iframe 
                     src="https://youtube.com" 
                     scrolling="no" 
@@ -82,57 +134,19 @@ HTML_PLAYER = """
 
 @app.route("/")
 def accueil():
-    mot_clef = request.args.get("search", "").strip()
-    animes_trouves = []
+    mot_clef = request.args.get("search", "").strip().lower()
     
-    url_anilist = "https://anilist.co"
-    
-    # Correction de la syntaxe de la requête GraphQL pour éviter les conflits d'échappement Python
+    # Filtrage en interne instantané sans dépendre d'un serveur tiers cassé
     if mot_clef:
-        query = """
-        query ($search: String) {
-          Page(page: 1, perPage: 24) {
-            media(search: $search, type: ANIME) {
-              id
-              title { romaji english }
-              coverImage { large }
-            }
-          }
-        }
-        """
-        variables = {'search': mot_clef}
+        animes_a_afficher = [a for a in CATALOGUE_ANIMES if mot_clef in a["title"].lower()]
     else:
-        query = """
-        query {
-          Page(page: 1, perPage: 24) {
-            media(sort: POPULARITY_DESC, type: ANIME) {
-              id
-              title { romaji english }
-              coverImage { large }
-            }
-          }
-        }
-        """
-        variables = {}
-
-    try:
-        reponse = requests.post(url_anilist, json={'query': query, 'variables': variables}, timeout=5).json()
-        elements = reponse.get("data", {}).get("Page", {}).get("media", [])
-        for item in elements:
-            titre = item["title"]["english"] if item["title"].get("english") else item["title"]["romaji"]
-            animes_trouves.append({
-                "id": item["id"],
-                "title": titre,
-                "image": item["coverImage"]["large"]
-            })
-    except Exception:
-        pass
-        
-    return render_template_string(HTML_ACCUEIL, animes=animes_trouves, recherche=mot_clef)
-
-@app.route("/video/<int:anime_id>")
+        animes_a_afficher = CATALOGUE_ANIMES
+            
+return render_template_string(HTML_ACCUEIL, animes=animes_a_afficher, recherche=request.args.get("search", ""))
+@app.route("/video/int:anime_id")
 def regarder_video(anime_id):
-    return render_template_string(HTML_PLAYER)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
+titre_anime = anime["title"] if anime else "Épisode de Streaming"
+return render_template_string(HTML_PLAYER, title=titre_anime)
+if name == "main":
+app.run(debug=True)

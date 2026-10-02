@@ -1,0 +1,631 @@
+/* =========================================
+   SHADOW PLAYER
+========================================= */
+
+.player-page {
+    background: #050505;
+}
+
+
+/* =========================================
+   CONTENEUR
+========================================= */
+
+.player-container {
+    width: min(1200px, 94%);
+    margin: 0 auto;
+    padding: 35px 0 70px;
+}
+
+
+/* =========================================
+   RETOUR
+========================================= */
+
+.back-button {
+    display: inline-block;
+
+    margin-bottom: 25px;
+
+    color: #aaa;
+    text-decoration: none;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    color: white;
+}
+
+
+/* =========================================
+   TITRE
+========================================= */
+
+.anime-header {
+    margin-bottom: 25px;
+}
+
+.anime-small-title {
+    margin: 0 0 5px;
+
+    color: #777;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+}
+
+.anime-header h1 {
+    margin: 0;
+
+    color: white;
+
+    font-size: 32px;
+}
+
+.episode-title {
+    margin-top: 8px;
+
+    color: #999;
+
+    font-size: 16px;
+}
+
+
+/* =========================================
+   PLAYER
+========================================= */
+
+.shadow-player {
+    width: 100%;
+
+    background: #000;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 0 1px #181818,
+        0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.video-wrapper {
+    position: relative;
+
+    width: 100%;
+
+    background: #000;
+
+    aspect-ratio: 16 / 9;
+}
+
+
+/* =========================================
+   VIDEO
+========================================= */
+
+.shadow-video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.video-message {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background: #050505;
+
+    pointer-events: none;
+
+    transition: opacity 0.3s;
+}
+
+.video-message.hidden {
+    opacity: 0;
+}
+
+.video-message-icon {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    background: #151515;
+
+    color: white;
+
+    font-size: 28px;
+
+    margin-bottom: 15px;
+}
+
+.video-message h2 {
+    margin: 0;
+
+    color: white;
+
+    font-size: 20px;
+
+    letter-spacing: 2px;
+}
+
+.video-message p {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CONTROLES
+========================================= */
+
+.player-controls {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding: 12px 15px 14px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.95),
+            rgba(0, 0, 0, 0.7),
+            transparent
+        );
+}
+
+
+/* =========================================
+   PROGRESSION
+========================================= */
+
+.progress-container {
+    width: 100%;
+
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    width: 100%;
+
+    height: 5px;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    background: #333;
+
+    border-radius: 10px;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    appearance: none;
+
+    width: 13px;
+    height: 13px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+.progress-bar::-moz-range-thumb {
+    width: 13px;
+    height: 13px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   LIGNE CONTROLES
+========================================= */
+
+.controls-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.controls-left,
+.controls-right {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+/* =========================================
+   BOUTONS PLAYER
+========================================= */
+
+.player-button {
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    padding: 7px 8px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.player-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================
+   VOLUME
+========================================= */
+
+.volume-bar {
+    width: 80px;
+
+    height: 4px;
+
+    cursor: pointer;
+
+    appearance: none;
+
+    background: #444;
+
+    border-radius: 10px;
+}
+
+.volume-bar::-webkit-slider-thumb {
+    appearance: none;
+
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+.volume-bar::-moz-range-thumb {
+    width: 11px;
+    height: 11px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+
+/* =========================================
+   TEMPS
+========================================= */
+
+.time-display {
+    color: #ddd;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   SELECT
+========================================= */
+
+.player-select {
+    padding: 7px 8px;
+
+    border: 1px solid #333;
+
+    border-radius: 6px;
+
+    background: #111;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.player-select option {
+    background: #111;
+
+    color: white;
+}
+
+
+/* =========================================
+   STATS
+========================================= */
+
+.player-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.stat-card {
+    padding: 20px;
+
+    background: #0d0d0d;
+
+    border: 1px solid #1c1c1c;
+
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: bold;
+}
+
+.stat-label {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.player-section {
+    margin-top: 35px;
+
+    padding: 22px;
+
+    background: #0b0b0b;
+
+    border: 1px solid #181818;
+
+    border-radius: 10px;
+}
+
+.player-section h2 {
+    margin: 0 0 15px;
+
+    color: white;
+
+    font-size: 18px;
+}
+
+
+/* =========================================
+   BOUTONS OPTIONS
+========================================= */
+
+.option-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+.option-button {
+    padding: 9px 15px;
+
+    border: 1px solid #292929;
+
+    border-radius: 7px;
+
+    background: #111;
+
+    color: #aaa;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.option-button:hover {
+    color: white;
+
+    border-color: #555;
+}
+
+.option-button.active {
+    background: white;
+
+    color: black;
+
+    border-color: white;
+}
+
+
+/* =========================================
+   EPISODES
+========================================= */
+
+.episode-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.episode-button {
+    display: inline-block;
+
+    padding: 9px 13px;
+
+    border-radius: 7px;
+
+    border: 1px solid #292929;
+
+    background: #111;
+
+    color: #aaa;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.episode-button:hover {
+    color: white;
+
+    border-color: #555;
+}
+
+.episode-button.active {
+    background: white;
+
+    color: black;
+
+    border-color: white;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    padding: 30px 20px;
+
+    text-align: center;
+
+    color: #555;
+
+    border-top: 1px solid #151515;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .anime-header h1 {
+        font-size: 25px;
+    }
+
+    .controls-row {
+        gap: 5px;
+    }
+
+    .controls-left,
+    .controls-right {
+        gap: 2px;
+    }
+
+    .volume-bar {
+        width: 55px;
+    }
+
+    .time-display {
+        font-size: 11px;
+    }
+
+    .player-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .player-button {
+        padding: 6px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .volume-bar {
+        display: none;
+    }
+
+    .time-display {
+        display: none;
+    }
+
+    .backwardButton,
+    .forwardButton {
+        font-size: 11px;
+    }
+
+    .player-controls {
+        padding: 8px;
+    }
+}

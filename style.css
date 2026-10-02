@@ -1,0 +1,896 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    background: #080a0d;
+}
+
+
+body {
+
+    margin: 0;
+
+    padding: 0;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #202632 0%,
+            #11141a 40%,
+            #080a0d 100%
+        );
+
+    color: #ffffff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 5%;
+
+    background: #0d1015;
+
+    border-bottom:
+        1px solid #252b35;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+}
+
+
+.logo {
+
+    color: #ffffff;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+
+}
+
+
+.logo span {
+
+    color: #ff4757;
+
+}
+
+
+.navbar nav {
+
+    display: flex;
+
+    gap: 28px;
+
+    margin-left: 45px;
+
+}
+
+
+.navbar nav a {
+
+    color: #aeb6c3;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+
+}
+
+
+.navbar nav a:hover {
+
+    color: #ffffff;
+
+}
+
+
+/* =====================================================
+   RECHERCHE
+===================================================== */
+
+.nav-search {
+
+    margin-left: auto;
+
+    display: flex;
+
+}
+
+
+.nav-search input {
+
+    width: 260px;
+
+    padding: 11px 14px;
+
+    background: #191e26;
+
+    border: 1px solid #303744;
+
+    border-right: none;
+
+    color: white;
+
+    outline: none;
+
+    border-radius: 5px 0 0 5px;
+
+}
+
+
+.nav-search button {
+
+    padding: 0 16px;
+
+    border: none;
+
+    background: #ff4757;
+
+    color: white;
+
+    cursor: pointer;
+
+    border-radius: 0 5px 5px 0;
+
+}
+
+
+/* =====================================================
+   CONTENU
+===================================================== */
+
+.container {
+
+    width: 92%;
+
+    max-width: 1400px;
+
+    margin: auto;
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+    margin-top: 35px;
+
+    padding: 60px 50px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #202733,
+            #14181f
+        );
+
+    border:
+        1px solid #303744;
+
+}
+
+
+.hero .petit-titre {
+
+    color: #ff4757;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+}
+
+
+.hero h1 {
+
+    margin: 10px 0;
+
+    font-size: 44px;
+
+}
+
+
+.hero p {
+
+    color: #aeb6c3;
+
+    max-width: 650px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   TITRE SECTION
+===================================================== */
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin: 45px 0 22px;
+
+}
+
+
+.section-title h2 {
+
+    margin: 0;
+
+    font-size: 24px;
+
+}
+
+
+.section-title span {
+
+    color: #7f8997;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   GRILLE ANIMES
+===================================================== */
+
+.grid-animes {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(190px, 1fr)
+        );
+
+    gap: 22px;
+
+    padding-bottom: 60px;
+
+}
+
+
+.anime-link {
+
+    color: inherit;
+
+    text-decoration: none;
+
+}
+
+
+.anime-card {
+
+    background: #171c23;
+
+    border:
+        1px solid #292f39;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+
+}
+
+
+.anime-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    border-color: #ff4757;
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.5);
+
+}
+
+
+.poster {
+
+    width: 100%;
+
+    height: 285px;
+
+    background: #0c0f13;
+
+}
+
+
+.poster img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+.anime-info {
+
+    padding: 14px;
+
+}
+
+
+.anime-info h3 {
+
+    margin:
+        0 0 8px;
+
+    font-size: 16px;
+
+}
+
+
+.episodes {
+
+    margin: 0;
+
+    color: #8e98a6;
+
+    font-size: 13px;
+
+}
+
+
+.genres {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-top: 10px;
+
+}
+
+
+.genres span {
+
+    padding: 4px 7px;
+
+    background: #252b35;
+
+    color: #9ea7b5;
+
+    border-radius: 3px;
+
+    font-size: 10px;
+
+}
+
+
+/* =====================================================
+   AUCUN RESULTAT
+===================================================== */
+
+.aucun-resultat {
+
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+}
+
+
+.aucun-icon {
+
+    font-size: 45px;
+
+}
+
+
+.aucun-resultat h2 {
+
+    color: #ff4757;
+
+}
+
+
+.aucun-resultat p {
+
+    color: #8993a2;
+
+}
+
+
+.aucun-resultat a {
+
+    color: #4da6ff;
+
+}
+
+
+/* =====================================================
+   PAGE PLAYER
+===================================================== */
+
+.watch-page {
+
+    width: 92%;
+
+    max-width: 1200px;
+
+    margin:
+        30px auto 70px;
+
+}
+
+
+.back-button {
+
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    color: #ff4757;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+}
+
+
+.watch-page > h1 {
+
+    margin:
+        0 0 25px;
+
+    font-size: 30px;
+
+}
+
+
+.watch-page > h1 span {
+
+    color: #4da6ff;
+
+}
+
+
+/* =====================================================
+   LES 3 BOUTONS / INFORMATIONS
+===================================================== */
+
+.stats-container {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.stat-button {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 17px;
+
+    background: #191e26;
+
+    border:
+        1px solid #2c333e;
+
+    border-radius: 7px;
+
+    color: white;
+
+    transition: 0.2s;
+
+}
+
+
+.stat-button:hover {
+
+    border-color: #ff4757;
+
+    background: #202631;
+
+}
+
+
+.stat-icon {
+
+    font-size: 25px;
+
+}
+
+
+.stat-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.stat-number {
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+
+.stat-label {
+
+    color: #8993a2;
+
+    font-size: 12px;
+
+    margin-top: 3px;
+
+}
+
+
+/* =====================================================
+   VIDEO
+===================================================== */
+
+.video-wrapper {
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    background: #000000;
+
+    border-radius: 9px;
+
+    overflow: hidden;
+
+    border:
+        1px solid #292f39;
+
+    box-shadow:
+        0 15px 50px
+        rgba(0, 0, 0, 0.7);
+
+    margin-bottom: 25px;
+
+}
+
+
+.video-wrapper iframe {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: 0;
+
+    display: block;
+
+}
+
+
+.no-video {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+.no-video-icon {
+
+    font-size: 45px;
+
+}
+
+
+.no-video h2 {
+
+    color: #ff4757;
+
+}
+
+
+.no-video p {
+
+    color: #858f9d;
+
+}
+
+
+/* =====================================================
+   COMMANDES
+===================================================== */
+
+.watch-controls {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+.control-section {
+
+    background: #171c23;
+
+    border:
+        1px solid #292f39;
+
+    border-radius: 8px;
+
+    padding: 18px;
+
+}
+
+
+.control-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 14px;
+
+}
+
+
+.control-title h3 {
+
+    margin: 0;
+
+    font-size: 14px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+}
+
+
+.control-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+
+.option-button {
+
+    display: inline-block;
+
+    padding:
+        10px 15px;
+
+    background: #252b35;
+
+    border:
+        1px solid #363e4b;
+
+    border-radius: 5px;
+
+    color: #e8ecf2;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: 0.15s;
+
+}
+
+
+.option-button:hover {
+
+    background: #343c4a;
+
+}
+
+
+.option-button.active-red {
+
+    background: #ff4757;
+
+    border-color: #ff4757;
+
+}
+
+
+.option-button.active-green {
+
+    background: #2ed573;
+
+    border-color: #2ed573;
+
+}
+
+
+.option-button.active-blue {
+
+    background: #1e90ff;
+
+    border-color: #1e90ff;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #606a77;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 750px) {
+
+
+    .navbar {
+
+        height: auto;
+
+        padding: 15px;
+
+        flex-wrap: wrap;
+
+        gap: 15px;
+
+    }
+
+
+    .navbar nav {
+
+        width: 100%;
+
+        margin-left: 0;
+
+        overflow-x: auto;
+
+    }
+
+
+    .nav-search {
+
+        width: 100%;
+
+        margin-left: 0;
+
+    }
+
+
+    .nav-search input {
+
+        width: 100%;
+
+    }
+
+
+    .hero {
+
+        padding: 35px 25px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size: 32px;
+
+    }
+
+
+    .stats-container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+}

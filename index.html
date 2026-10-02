@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Anime</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">SHADOW<span>ANIME</span></div>
+        <nav>
+            <a href="/">Accueil</a>
+            <a href="/">Catalogue</a>
+        </nav>
+        <!-- BARRE DE RECHERCHE DYNAMIQUE -->
+        <div class="nav-search">
+            <form action="/" method="get" style="display: flex;">
+                <input type="text" name="search" placeholder="Rechercher un anime..." value="{{ recherche }}">
+                <button type="submit">🔍</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HERO BLOC -->
+        <section class="hero">
+            <p class="petit-titre">BIENVENUE SUR</p>
+            <h1> Shadow Anime</h1>
+            <p>Retrouvez vos animes préférés en VF, VOSTFR, anglais et version originale avec sous-titres anglais.</p>
+        </section>
+
+        <section class="section-title">
+            <h2>Catalogue</h2>
+            <span>{{ animes|length }} anime(s) disponible(s)</span>
+        </section>
+
+        <!-- GRILLE DES CARTES -->
+        <div class="grid-animes">
+            {% for anime in animes %}
+            <a href="/video/{{ anime.id }}" class="anime-link">
+                <div class="anime-card">
+                    <div class="poster">
+                        <img src="{{ anime.image }}" alt="Affiche de {{ anime.titre }}">
+                    </div>
+                    <div class="anime-info">
+                        <h3>{{ anime.titre }}</h3>
+                        <p class="episodes">{{ anime.episodes|length }} épisode(s)</p>
+                        <div class="genres">
+                            {% for genre in anime.genres %}
+                                <span>{{ genre }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% else %}
+            <!-- AUCUN RÉSULTAT -->
+            <div class="aucun-resultat">
+                <div class="aucun-icon">🔍</div>
+                <h2>Aucun anime trouvé</h2>
+                <p>Aucun résultat pour : <strong>{{ recherche }}</strong></p>
+                <a href="/">Retour au catalogue complet</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Shadow Anime</p>
+    </footer>
+
+</body>
+</html>

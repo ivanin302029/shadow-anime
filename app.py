@@ -2,11 +2,11 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# CATALOGUE COMPLET SANS CARACTÈRES SPÉCIAUX DE BLOCAGE
+# BASE DE DONNÉES SHADOW ANIME - VISUELS ET FLUX STABLES AUTORISÉS SANS BLOCAGE
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Naruto", "image": "https://pixabay.com"},
-    {"id": 2, "title": "Naruto Shippuden", "image": "https://pixabay.com"},
-    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://pixabay.com"},
+    {"id": 1, "title": "Naruto", "image": "https://placehold.co"},
+    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN"},
+    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co"},
     {"id": 4, "title": "One Piece", "image": "https://placehold.co"},
     {"id": 5, "title": "Bleach", "image": "https://placehold.co"},
     {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co"},
@@ -66,10 +66,11 @@ HTML_PLAYER = """
     <div style="padding: 20px; text-align: center;">
         <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">← Retour au catalogue</a>
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
-        <p style="color: #1e90ff; font-weight: bold; margin: 0 0 15px 0;">Épisode 1 — Lecteur Universel Public</p>
+        <p style="color: #1e90ff; font-weight: bold; margin: 0 0 15px 0;">Épisode 1 — SHADOW PLAYER Indépendant</p>
         <section class="shadow-player">
             <div class="video-wrapper">
-                <iframe src="https://youtube.com" scrolling="no" frameborder="0" width="100%" height="100%" allowfullscreen="true" allow="autoplay; fullscreen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+                <!-- TON PROPRE LECTEUR INDÉPENDANT SANS YOUTUBE NI PUBS -->
+                <video src="https://zencdn.net" controls autoplay muted width="100%" height="100%" style="display: block; background: #000; border: none; outline: none;"></video>
             </div>
         </section>
     </div>
@@ -91,5 +92,3 @@ def regarder_video(anime_id):
     anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
     titre_anime = anime["title"] if anime else "Épisode"
     return render_template_string(HTML_PLAYER, title=titre_anime)
-
-# Pas de bloc if __name__ pour éviter toute erreur d'indentation avec Gunicorn

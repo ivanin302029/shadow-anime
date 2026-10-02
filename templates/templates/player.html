@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ anime.titre }} — Shadow Anime</title>
+    <style>
+        html, body { background-color: #11141a !important; color: white !important; margin: 0; padding: 0; font-family: 'Arial', sans-serif; overflow-y: auto; min-height: 100vh; }
+        .shadow-player { display: flex; justify-content: center; align-items: center; background: #1e222b; padding: 15px; border-radius: 8px; margin: 20px auto; width: 95%; max-width: 950px; }
+        .video-wrapper { width: 100%; aspect-ratio: 16 / 9; overflow-y: auto !important; position: relative; border-radius: 4px; background: #000; }
+        .video-wrapper::-webkit-scrollbar { width: 10px; }
+        .video-wrapper::-webkit-scrollbar-track { background: #1e222b; }
+        .video-wrapper::-webkit-scrollbar-thumb { background: #ff4757; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div style="padding: 20px; text-align: center;">
+        <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold;">← Retour</a>
+        <h1>{{ anime.titre }}</h1>
+        
+        <section class="shadow-player">
+            <div class="video-wrapper">
+                {% if lien_video %}
+                    <iframe 
+                        src="{{ lien_video }}" 
+                        scrolling="yes" 
+                        frameborder="0" 
+                        width="100%" 
+                        height="140%" 
+                        sandbox="allow-scripts allow-same-origin allow-forms"
+                        allowfullscreen="true" 
+                        allow="autoplay; fullscreen"
+                        style="width: 100%; height: 140%; border: none;">
+                    </iframe>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+</body>
+</html>

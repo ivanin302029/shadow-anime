@@ -76,7 +76,7 @@ HTML_ACCUEIL = """
         {% if recherche %}Résultats pour "{{ recherche }}"{% else %}🔥 Catalogue des Animes Populaires{% endif %}
     </h2>
 
-    <!-- GRILLE DE DEFILEMENT COMPLETE -->
+    <!-- GRILLE GÉANTE DE 40 ANIMES -->
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1200px; margin: 0 auto; padding: 15px;">
         {% for anime in animes %}
         <a href="/video/{{ anime.id }}" style="text-decoration: none; color: white; background: #1e222b; padding: 12px; border-radius: 8px; width: 210px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); display: flex; flex-direction: column; justify-content: space-between;">
@@ -93,7 +93,6 @@ HTML_ACCUEIL = """
 </html>
 """
 
-# Modèle du lecteur avec l'Iframe d'intégration YouTube universelle (Zéro écran noir)
 HTML_PLAYER = """
 <!DOCTYPE html>
 <html lang="fr">
@@ -114,7 +113,6 @@ HTML_PLAYER = """
         
         <section class="shadow-player">
             <div class="video-wrapper">
-                <!-- Lecteur d'intégration compatible 100% avec Render -->
                 <iframe 
                     src="https://youtube.com" 
                     scrolling="no" 
@@ -136,16 +134,16 @@ HTML_PLAYER = """
 def accueil():
     mot_clef = request.args.get("search", "").strip().lower()
     
-    # Filtrage en interne instantané sans dépendre d'un serveur tiers cassé
     if mot_clef:
         animes_a_afficher = [a for a in CATALOGUE_ANIMES if mot_clef in a["title"].lower()]
     else:
         animes_a_afficher = CATALOGUE_ANIMES
             
-return render_template_string(HTML_ACCUEIL, animes=animes_a_afficher, recherche=request.args.get("search", ""))
-@app.route("/video/int:anime_id")
+    return render_template_string(HTML_ACCUEIL, animes=animes_a_afficher, recherche=request.args.get("search", ""))
+
+@app.route("/video/<int:anime_id>")
 def regarder_video(anime_id):
-anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
+    anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
 titre_anime = anime["title"] if anime else "Épisode de Streaming"
 return render_template_string(HTML_PLAYER, title=titre_anime)
 if name == "main":

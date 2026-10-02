@@ -146,5 +146,6 @@ def regarder_video(anime_id):
     anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
 titre_anime = anime["title"] if anime else "Épisode de Streaming"
 return render_template_string(HTML_PLAYER, title=titre_anime)
-if name == "main":
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
+

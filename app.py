@@ -2,17 +2,17 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES SHADOW ANIME - PARAMÉTRÉE AVEC TON IFRAME
+# BASE DE DONNÉES SHADOW ANIME
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Naruto", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN", "lien": "https://onrender.com"},
-    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 4, "title": "One Piece", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 5, "title": "Bleach", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co", "lien": "https://onrender.com"}
+    {"id": 1, "title": "Naruto", "image": "https://placehold.co"},
+    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN"},
+    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co"},
+    {"id": 4, "title": "One Piece", "image": "https://placehold.co"},
+    {"id": 5, "title": "Bleach", "image": "https://placehold.co"},
+    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co"},
+    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co"},
+    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co"},
+    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co"}
 ]
 
 HTML_ACCUEIL = """
@@ -59,7 +59,7 @@ HTML_PLAYER = """
     <style>
         html, body { background-color: #11141a !important; color: white !important; margin: 0; padding: 0; font-family: 'Arial', sans-serif; overflow-y: auto; min-height: 100vh; }
         .shadow-player { display: flex; justify-content: center; align-items: center; background: #1e222b; padding: 15px; border-radius: 8px; margin: 20px auto; width: 95%; max-width: 850px; box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
-        .video-wrapper { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; position: relative; border-radius: 4px; background: #000; }
+        .video-wrapper { width: 100%; aspect-ratio: 16 / 9; position: relative; border-radius: 4px; background: #000; overflow: hidden; }
     </style>
 </head>
 <body>
@@ -68,17 +68,17 @@ HTML_PLAYER = """
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
         <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Épisode 1 — SHADOW PLAYER</p>
         
-        <!-- TA STRUCTURE D'IFRAME EXACTE ET NETTOYÉE -->
+        <!-- INTÉGRATION MOT POUR MOT DE TON CODE D'IFRAME COPIÉ AVEC L'ADRESSE OFFICIELLE NETTOYÉE -->
         <section class="shadow-player">
             <div class="video-wrapper">
                 <iframe 
-                    src="{{ lien_video }}" 
+                    src="https://render.com" 
                     width="100%" 
                     height="100%" 
                     frameborder="0" 
                     scrolling="no" 
                     allowfullscreen="true"
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
                 </iframe>
             </div>
         </section>
@@ -100,5 +100,4 @@ def accueil():
 def regarder_video(anime_id):
     anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
     titre_anime = anime["title"] if anime else "Épisode"
-    lien_streaming = anime["lien"] if anime else ""
-    return render_template_string(HTML_PLAYER, title=titre_anime, lien_video=lien_streaming)
+    return render_template_string(HTML_PLAYER, title=titre_anime)

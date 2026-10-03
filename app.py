@@ -2,7 +2,7 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES OFFICIELLE DE PRODUCTION DE SHADOW ANIME
+# BASE DE DONNÉES OFFICIELLE DE PRODUCTION - TOUT POINTE SUR TON LECTEUR SHDW-PLAYER
 CATALOGUE_ANIMES = [
     {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://onrender.com"},
     {"id": 2, "title": "One Piece", "image": "https://placehold.co", "lien": "https://onrender.com"},
@@ -22,7 +22,7 @@ HTML_ACCUEIL = """
 </head>
 <body style="background-color: #11141a; color: white; font-family: Arial, sans-serif; text-align: center; padding: 40px; margin: 0;">
     <h1 style="color: #ff4757; font-size: 42px; margin-bottom: 10px; font-weight: bold; letter-spacing: 2px;">SHADOW ANIME</h1>
-    <p style="color: #a4b0be; margin-bottom: 30px; font-size: 14px;">Votre catalogue de streaming automatique en ligne</p>
+    <p style="color: #a4b0be; margin-bottom: 30px; font-size: 14px;">Votre catalogue de streaming en ligne</p>
     
     <form action="/" method="get" style="margin-bottom: 50px;">
         <input type="text" name="search" value="{{ recherche }}" placeholder="Rechercher un anime..." style="padding: 14px 25px; width: 400px; border-radius: 25px; border: none; background: #1e222b; color: white; outline: none; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
@@ -59,10 +59,11 @@ HTML_PLAYER = """
     <div style="padding: 20px; text-align: center;">
         <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">← Retour au catalogue</a>
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
-        <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Shadow Player Multi-Résolutions</p>
+        <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Shadow Player Original Réintégré</p>
         
         <section class="shadow-player">
             <div class="video-wrapper">
+                <!-- Chargement direct de ton lecteur shdw-player sans aucun lien externe bloquant -->
                 <iframe 
                     src="{{ lien_video }}" 
                     width="100%" 

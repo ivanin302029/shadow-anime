@@ -2,26 +2,24 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES AVEC TON INTEGRATION PARFAITE SANS BLOCAGE RENDER
 CATALOGUE_ANIMES = [
     {
         "id": 1, 
         "title": "Chainsaw Man", 
-        "image": "https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806", 
-        # Liaison exacte de l'adresse de ton lecteur et de la chaîne de paramètres vidéo
-        "player_url": "https://shdw-player.onrender.com"
+        "image": "https://placehold.co", 
+        "player_url": "https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806"
     },
     {
         "id": 2, 
         "title": "One Piece", 
         "image": "https://placehold.co", 
-        "player_url": "https://shdw-player.onrender.com"
+        "player_url": "https://onrender.com"
     },
     {
         "id": 3, 
         "title": "Naruto", 
         "image": "https://placehold.co", 
-        "player_url": "https://shdw-player.onrender.com"
+        "player_url": "https://onrender.com"
     }
 ]
 
@@ -36,7 +34,6 @@ HTML_ACCUEIL = """
 <body style="background-color: #11141a; color: white; font-family: Arial, sans-serif; text-align: center; padding: 40px; margin: 0;">
     <h1 style="color: #ff4757; font-size: 42px; margin-bottom: 10px; font-weight: bold; letter-spacing: 2px;">SHADOW ANIME</h1>
     <p style="color: #a4b0be; margin-bottom: 30px; font-size: 14px;">Votre catalogue de streaming en ligne</p>
-    
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1200px; margin: 0 auto; padding: 15px;">
         {% for anime in animes %}
         <a href="/video/{{ anime.id }}" style="text-decoration: none; color: white; background: #1e222b; padding: 12px; border-radius: 8px; width: 210px; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
@@ -63,24 +60,37 @@ HTML_PLAYER = """
 </head>
 <body>
     <div style="padding: 20px; text-align: center;">
-        <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">← Retour au catalogue</a>
+        <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">&larr; Retour au catalogue</a>
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
         <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Shadow Player Original Réintégré</p>
         
         <section class="shadow-player">
-            <div class="video-wrapper">
-                <iframe 
-                    src="{{ player_url }}" 
-                    width="100%" 
-                    height="100%" 
-                    frameborder="0" 
-                    scrolling="no" 
-                    allowfullscreen="true"
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
-                </iframe>
+            <div class="video-wrapper" id="player-target">
+                <!-- L'iframe va être injectée ici de manière dynamique pour détruire le cache -->
             </div>
         </section>
     </div>
+
+    <script>
+        // Injection forcée du lien réel de ton shdw-player au chargement de l'écran
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('player-target');
+            const ifr = document.createElement('iframe');
+            ifr.src = "https://shdw-player.onrender.com";
+            ifr.width = "100%";
+            ifr.height = "100%";
+            ifr.frameBorder = "0";
+            ifr.scrolling = "no";
+            ifr.setAttribute('allowfullscreen', 'true');
+            ifr.style.position = "absolute";
+            ifr.style.top = "0";
+            ifr.style.left = "0";
+            ifr.style.width = "100%";
+            ifr.style.height = "100%";
+            ifr.style.border = "none";
+            container.appendChild(ifr);
+        });
+    </script>
 </body>
 </html>
 """

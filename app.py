@@ -8,44 +8,14 @@ def remove_security_headers(response):
     response.headers['Content-Security-Policy'] = "frame-ancestors 'self' https://onrender.com https://onrender.com;"
     return response
 
-# REPERTOIRE AVEC DE VRAIS FLUX DE STREAMING HD INDÉPENDANTS
+# REPERTOIRE DES LIENS VIDÉOS DE TEST OFFICIELS
 CATALOGUE_ANIMES = [
-    {
-        "id": 1, 
-        "title": "Chainsaw Man", 
-        "image": "https://placehold.co",
-        "video": "https://googleapis.com"
-    },
-    {
-        "id": 2, 
-        "title": "One Piece", 
-        "image": "https://placehold.co",
-        "video": "https://googleapis.com"
-    },
-    {
-        "id": 3, 
-        "title": "Naruto", 
-        "image": "https://placehold.co",
-        "video": "https://googleapis.com"
-    },
-    {
-        "id": 4, 
-        "title": "Solo Leveling", 
-        "image": "https://placehold.co",
-        "video": "https://googleapis.com"
-    },
-    {
-        "id": 5, 
-        "title": "That Time I Got Reincarnated as a Slime", 
-        "image": "https://placehold.co",
-        "video": "https://googleapis.com"
-    },
-    {
-        "id": 6, 
-        "title": "Re:Zero", 
-        "image": "https://placehold.co",
-        "video": "https://googleapis.com"
-    }
+    {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co", "video_file": "anime_1080p.mp4"},
+    {"id": 2, "title": "One Piece", "image": "https://placehold.co", "video_file": "anime_720p.mp4"},
+    {"id": 3, "title": "Naruto", "image": "https://placehold.co", "video_file": "anime_360p.mp4"},
+    {"id": 4, "title": "Solo Leveling", "image": "https://placehold.co", "video_file": "anime_1080p.mp4"},
+    {"id": 5, "title": "That Time I Got Reincarnated as a Slime", "image": "https://placehold.co", "video_file": "anime_720p.mp4"},
+    {"id": 6, "title": "Re:Zero", "image": "https://placehold.co", "video_file": "anime_360p.mp4"}
 ]
 
 HTML_ACCUEIL = """
@@ -89,10 +59,10 @@ HTML_PLAYER = """
         <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">&larr; Retour au catalogue</a>
         <h1 style="margin: 20px 0 25px 0; font-size: 32px;">{{ title }}</h1>
         
-        <!-- TON BLOC D'IFRAME BRUT RESTAURÉ AVEC LA TRANSMISSION DU LIEN VIDEO -->
         <div class="shadow-player">
+            <!-- Envoi de la variable de fichier directement à ton lecteur -->
             <iframe 
-                src="https://shdw-player.onrender.com" play={{ video_url }}" 
+                src="https://shdw-player.onrender.com" play={{ file_name }}" 
                 width="100%" 
                 height="100%" 
                 frameborder="0" 
@@ -115,4 +85,4 @@ def accueil():
 @app.route("/video/<int:anime_id>")
 def regarder_video(anime_id):
     anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
-    return render_template_string(HTML_PLAYER, title=anime["title"], video_url=anime["video"])
+    return render_template_string(HTML_PLAYER, title=anime["title"], file_name=anime["video_file"])

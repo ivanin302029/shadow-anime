@@ -2,17 +2,17 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES SHADOW ANIME
+# BASE DE DONNÉES SHADOW ANIME - FLUX COMPATIBLES AVEC TON IFRAME
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Naruto", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN", "lien": "https://onrender.com"},
-    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 4, "title": "One Piece", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 5, "title": "Bleach", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co", "lien": "https://onrender.com"}
+    {"id": 1, "title": "Naruto", "image": "https://placehold.co", "lien": "https://youtube.com"},
+    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN", "lien": "https://youtube.com"},
+    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co", "lien": "https://youtube.com"},
+    {"id": 4, "title": "One Piece", "image": "https://placehold.co", "lien": "https://youtube.com"},
+    {"id": 5, "title": "Bleach", "image": "https://placehold.co", "lien": "https://youtube.com"},
+    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://youtube.com"},
+    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co", "lien": "https://youtube.com"},
+    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co", "lien": "https://youtube.com"},
+    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co", "lien": "https://youtube.com"}
 ]
 
 HTML_ACCUEIL = """
@@ -62,11 +62,11 @@ HTML_PLAYER = """
 </head>
 <body>
     <div style="padding: 20px; text-align: center;">
-        <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">← Retour au catalogue</a>
+        <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">&larr; Retour au catalogue</a>
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
         <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Épisode 1 — SHADOW PLAYER</p>
         
-        <!-- RESTAURATION DE TON IFRAME STRUCTURÉE -->
+        <!-- TA STRUCTURE D'IFRAME PROPRE ET NETTOYÉE -->
         <div style="position: relative; width: 100%; max-width: 850px; margin: 0 auto; aspect-ratio: 16 / 9; background-color: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
             <iframe 
                 src="{{ lien_video }}" 

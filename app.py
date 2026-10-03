@@ -7,7 +7,7 @@ CATALOGUE_ANIMES = [
     {
         "id": 1, 
         "title": "Chainsaw Man", 
-        "image": "https://placehold.co", 
+        "image": "https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806", 
         # Liaison exacte de l'adresse de ton lecteur et de la chaîne de paramètres vidéo
         "player_url": "https://shdw-player.onrender.com"
     },

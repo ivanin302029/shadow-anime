@@ -92,7 +92,7 @@ HTML_PLAYER = """
         <div class="shadow-player-wrapper">
             <!-- Envoi du lien vidéo au lecteur via le paramètre ?play= -->
             <iframe 
-                src="https://shadow-anime.onrender.com" play={{ video_url }}" 
+                src=" https://shdw-player.onrender.com" play={{ video_url }}" 
                 width="100%" 
                 height="650px; border: none; overflow: hidden;">
             </iframe>

@@ -2,14 +2,14 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# Base de données simplifiée pour forcer l'affichage de ton lecteur
+# BASE DE DONNÉES SHADOW ANIME - POINTE DIRECTEMENT SUR LE FICHIER HTML DU LECTEUR
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co"},
-    {"id": 2, "title": "One Piece", "image": "https://placehold.co"},
-    {"id": 3, "title": "Naruto", "image": "https://placehold.co"},
-    {"id": 4, "title": "Solo Leveling", "image": "https://placehold.co"},
-    {"id": 5, "title": "That Time I Got Reincarnated as a Slime", "image": "https://placehold.co"},
-    {"id": 6, "title": "Re:Zero", "image": "https://placehold.co"}
+    {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co" link: "https://shdw-player.onrender.com/"},
+    {"id": 2, "title": "One Piece", "image": "https://placehold.co" link: "https://shdw-player.onrender.com/"},
+    {"id": 3, "title": "Naruto", "image": "https://placehold.co" link: "https://shdw-player.onrender.com/"},
+    {"id": 4, "title": "Solo Leveling", "image": "https://placehold.co" link: "https://shdw-player.onrender.com/"},
+    {"id": 5, "title": "That Time I Got Reincarnated as a Slime", "image": "https://placehold.co" link: "https://shdw-player.onrender.com/"},
+    {"id": 6, "title": "Re:Zero", "image": "https://placehold.co" link: "https://shdw-player.onrender.com/"}
 ]
 
 HTML_ACCUEIL = """
@@ -63,9 +63,9 @@ HTML_PLAYER = """
         
         <section class="shadow-player">
             <div class="video-wrapper">
-                <!-- Connexion directe et forcée à l'adresse de ton lecteur shdw-player -->
+                <!-- AJOUT DU /index.html POUR CIBLER LE CODE DU LECTEUR VIOLET SANS BLOCAGE -->
                 <iframe 
-                    src="https://onrender.com" 
+                    src="link: "https://shdw-player.onrender.com/"" 
                     width="100%" 
                     height="100%" 
                     frameborder="0" 

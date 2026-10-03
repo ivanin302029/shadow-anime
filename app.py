@@ -9,19 +9,19 @@ CATALOGUE_ANIMES = [
         "title": "Chainsaw Man", 
         "image": "https://placehold.co", 
         # Liaison exacte de l'adresse de ton lecteur et de la chaîne de paramètres vidéo
-        "player_url": "https://onrender.com"
+        "player_url": "https://shdw-player.onrender.com"
     },
     {
         "id": 2, 
         "title": "One Piece", 
         "image": "https://placehold.co", 
-        "player_url": "https://onrender.com"
+        "player_url": "https://shdw-player.onrender.com"
     },
     {
         "id": 3, 
         "title": "Naruto", 
         "image": "https://placehold.co", 
-        "player_url": "https://onrender.com"
+        "player_url": "https://shdw-player.onrender.com"
     }
 ]
 

@@ -2,17 +2,17 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES SHADOW ANIME - VISUELS ET FLUX STABLES AUTORISÉS SANS BLOCAGE
+# BASE DE DONNÉES SHADOW ANIME - CONFIGURÉE AVEC TES FLUX STREAMING
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Naruto", "image": "https://placehold.co"},
-    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN"},
-    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co"},
-    {"id": 4, "title": "One Piece", "image": "https://placehold.co"},
-    {"id": 5, "title": "Bleach", "image": "https://placehold.co"},
-    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co"},
-    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co"},
-    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co"},
-    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co"}
+    {"id": 1, "title": "Naruto", "image": "https://placehold.co", "lien": "https://googleapis.com"},
+    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN", "lien": "https://googleapis.com"},
+    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co", "lien": "https://googleapis.com"},
+    {"id": 4, "title": "One Piece", "image": "https://placehold.co", "lien": "https://googleapis.com"},
+    {"id": 5, "title": "Bleach", "image": "https://placehold.co", "lien": "https://googleapis.com"},
+    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://googleapis.com"},
+    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co", "lien": "https://googleapis.com"},
+    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co", "lien": "https://googleapis.com"},
+    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co", "lien": "https://googleapis.com"}
 ]
 
 HTML_ACCUEIL = """
@@ -21,7 +21,7 @@ HTML_ACCUEIL = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadow Anime — Catalogue Complet</title>
+    <title>Shadow Anime — Catalogue</title>
 </head>
 <body style="background-color: #11141a; color: white; font-family: Arial, sans-serif; text-align: center; padding: 40px; margin: 0;">
     <h1 style="color: #ff4757; font-size: 42px; margin-bottom: 10px; font-weight: bold; letter-spacing: 2px;">SHADOW ANIME</h1>
@@ -50,6 +50,7 @@ HTML_ACCUEIL = """
 </html>
 """
 
+# INTÉGRATION DE TON NOUVEAU CONTENEUR MULTIMÉDIA DE LECTEUR SHDW
 HTML_PLAYER = """
 <!DOCTYPE html>
 <html lang="fr">
@@ -58,21 +59,27 @@ HTML_PLAYER = """
     <title>{{ title }} — Shadow Anime</title>
     <style>
         html, body { background-color: #11141a !important; color: white !important; margin: 0; padding: 0; font-family: 'Arial', sans-serif; overflow-y: auto; min-height: 100vh; }
-        .shadow-player { display: flex; justify-content: center; align-items: center; background: #1e222b; padding: 15px; border-radius: 8px; margin: 20px auto; width: 95%; max-width: 950px; box-shadow: 0 8px 30px rgba(0,0,0,0.6); }
-        .video-wrapper { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; position: relative; border-radius: 4px; background: #000; }
     </style>
 </head>
 <body>
     <div style="padding: 20px; text-align: center;">
         <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">← Retour au catalogue</a>
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
-        <p style="color: #1e90ff; font-weight: bold; margin: 0 0 15px 0;">Épisode 1 — SHADOW PLAYER Indépendant</p>
-        <section class="shadow-player">
-            <div class="video-wrapper">
-                <!-- TON PROPRE LECTEUR INDÉPENDANT SANS YOUTUBE NI PUBS -->
-                <video src="https://zencdn.net" controls autoplay muted width="100%" height="100%" style="display: block; background: #000; border: none; outline: none;"></video>
-            </div>
-        </section>
+        <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Épisode 1 — SHADOW PLAYER</p>
+        
+        <!-- TON BLOC D'INTÉGRATION STRUCTURÉ INTERNE ET ADAPTÉ -->
+        <div style="position: relative; width: 100%; max-width: 850px; margin: 0 auto; aspect-ratio: 16 / 9; background-color: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
+            <!-- Le lecteur vidéo natif utilise ton lien dynamique de flux direct -->
+            <video 
+                src="{{ lien_video }}" 
+                controls 
+                autoplay 
+                muted 
+                width="100%" 
+                height="100%" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; border: none; outline: none;">
+            </video>
+        </div>
     </div>
 </body>
 </html>
@@ -91,4 +98,5 @@ def accueil():
 def regarder_video(anime_id):
     anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
     titre_anime = anime["title"] if anime else "Épisode"
-    return render_template_string(HTML_PLAYER, title=titre_anime)
+    lien_streaming = anime["lien"] if anime else ""
+    return render_template_string(HTML_PLAYER, title=titre_anime, lien_video=lien_streaming)

@@ -2,14 +2,44 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES SHADOW ANIME - POINTE DIRECTEMENT SUR LE FICHIER HTML DU LECTEUR
+# BASE DE DONNÉES DE PRODUCTION AVEC LE FLUX EXTÉRIEUR DE CHAINSAW MAN CONNECTÉ
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co"},
-    {"id": 2, "title": "One Piece", "image": "https://placehold.co"},
-    {"id": 3, "title": "Naruto", "image": "https://placehold.co"},
-    {"id": 4, "title": "Solo Leveling", "image": "https://placehold.co"},
-    {"id": 5, "title": "That Time I Got Reincarnated as a Slime", "image": "https://placehold.co"},
-    {"id": 6, "title": "Re:Zero", "image": "https://placehold.co"}
+    {
+        "id": 1, 
+        "title": "Chainsaw Man", 
+        "image": "https://placehold.co", 
+        "player_url": "https://shdw-player.onrender.com"
+    },
+    {
+        "id": 2, 
+        "title": "One Piece", 
+        "image": "https://placehold.co", 
+        "player_url": "https://onrender.com"
+    },
+    {
+        "id": 3, 
+        "title": "Naruto", 
+        "image": "https://placehold.co", 
+        "player_url": "https://onrender.com"
+    },
+    {
+        "id": 4, 
+        "title": "Solo Leveling", 
+        "image": "https://placehold.co", 
+        "player_url": "https://onrender.com"
+    },
+    {
+        "id": 5, 
+        "title": "That Time I Got Reincarnated as a Slime", 
+        "image": "https://placehold.co", 
+        "player_url": "https://onrender.com"
+    },
+    {
+        "id": 6, 
+        "title": "Re:Zero", 
+        "image": "https://placehold.co", 
+        "player_url": "https://onrender.com"
+    }
 ]
 
 HTML_ACCUEIL = """
@@ -57,15 +87,15 @@ HTML_PLAYER = """
 </head>
 <body>
     <div style="padding: 20px; text-align: center;">
-        <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">← Retour au catalogue</a>
+        <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">&larr; Retour au catalogue</a>
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
         <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Shadow Player Original Réintégré</p>
         
         <section class="shadow-player">
             <div class="video-wrapper">
-                <!-- AJOUT DU /index.html POUR CIBLER LE CODE DU LECTEUR VIOLET SANS BLOCAGE -->
+                <!-- Chargement dynamique de ton lecteur configuré avec ton flux -->
                 <iframe 
-                    src="https://shdw-player.onrender.com" 
+                    src="{{ player_url }}" 
                     width="100%" 
                     height="100%" 
                     frameborder="0" 
@@ -93,4 +123,5 @@ def accueil():
 def regarder_video(anime_id):
     anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
     titre_anime = anime["title"] if anime else "Épisode"
-    return render_template_string(HTML_PLAYER, title=titre_anime)
+    player_url = anime["player_url"] if anime else ""
+    return render_template_string(HTML_PLAYER, title=titre_anime, player_url=player_url)

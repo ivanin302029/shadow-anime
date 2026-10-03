@@ -2,17 +2,17 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES SHADOW ANIME
+# BASE DE DONNÉES SHADOW ANIME - CONNECTÉE À TON LECTEUR SHDW-PLAYER
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Naruto", "image": "https://placehold.co"},
-    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN"},
-    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co"},
-    {"id": 4, "title": "One Piece", "image": "https://placehold.co"},
-    {"id": 5, "title": "Bleach", "image": "https://placehold.co"},
-    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co"},
-    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co"},
-    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co"},
-    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co"}
+    {"id": 1, "title": "Naruto", "image": "https://placehold.co", "lien": "https://shdw-player.onrender.com"},
+    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN", "lien": "https://shdw-player.onrender.com"},
+    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co", "lien": "https://shdw-player.onrender.com"},
+    {"id": 4, "title": "One Piece", "image": "https://placehold.co", "lien": "https://shdw-player.onrender.com"},
+    {"id": 5, "title": "Bleach", "image": "https://placehold.co", "lien": "https://shdw-player.onrender.com"},
+    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://shdw-player.onrender.com"},
+    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co", "lien": "https://shdw-player.onrender.com"},
+    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co", "lien": "https://shdw-player.onrender.com"},
+    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co", "lien": "https://shdw-player.onrender.com"}
 ]
 
 HTML_ACCUEIL = """
@@ -68,11 +68,11 @@ HTML_PLAYER = """
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
         <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Épisode 1 — SHADOW PLAYER</p>
         
-        <!-- INTÉGRATION MOT POUR MOT DE TON CODE D'IFRAME COPIÉ AVEC L'ADRESSE OFFICIELLE NETTOYÉE -->
+        <!-- INTÉGRATION DE TON PROPRE LECTEUR INTERNE SANS COMPOSANT BRUT -->
         <section class="shadow-player">
             <div class="video-wrapper">
                 <iframe 
-                    src="https://render.com" 
+                    src="{{ lien_video }}" 
                     width="100%" 
                     height="100%" 
                     frameborder="0" 
@@ -100,4 +100,5 @@ def accueil():
 def regarder_video(anime_id):
     anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
     titre_anime = anime["title"] if anime else "Épisode"
-    return render_template_string(HTML_PLAYER, title=titre_anime)
+    lien_streaming = anime["lien"] if anime else ""
+    return render_template_string(HTML_PLAYER, title=titre_anime, lien_video=lien_streaming)

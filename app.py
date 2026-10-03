@@ -2,13 +2,14 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
+# CONFIGURATION DU BLOCAGE DES EN-TÊTES DE SÉCURITÉ POUR L'IFRAME
 @app.after_request
 def remove_security_headers(response):
     response.headers.remove('X-Frame-Options')
     response.headers['Content-Security-Policy'] = "frame-ancestors 'self' https://shadow-anime.onrender.com https://shdw-player.onrender.com;"
     return response
 
-# REPERTOIRE AVEC DE VRAIS FLUX DE LECTURE STABLES INTERNATIONAUX
+# BASE DE DONNÉES DU CATALOGUE — VRAIS FLUX DE VISIONNAGE DISPONIBLES SANS COUPURE
 CATALOGUE_ANIMES = [
     {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co", "video": "https://unified-streaming.com"},
     {"id": 2, "title": "One Piece", "image": "https://placehold.co", "video": "https://unified-streaming.com"},
@@ -52,10 +53,11 @@ HTML_PLAYER = """
     <div style="padding: 20px; text-align: center;">
         <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold;">&larr; Retour au catalogue</a>
         <h1 style="color: white; margin: 20px 0;">{{ title }}</h1>
+        
+        <!-- INTEGRATION AVEC L'ADRESSE STRICTE ET EXACTE DE TON SHDW-PLAYER -->
         <div class="shadow-player">
-            <!-- APPEL DIRECT DU LECTEUR UNIQUE DE MANIÈRE DYNAMIQUE -->
             <iframe 
-                src="https://onrender.com{{ video_url }}" 
+                src="https://shdw-player.onrender.com" {{ video_url }}" 
                 width="100%" 
                 height="100%" 
                 frameborder="0" 
@@ -63,7 +65,7 @@ HTML_PLAYER = """
                 allowfullscreen="true"
                 webkitallowfullscreen="true" 
                 mozallowfullscreen="true"
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
             </iframe>
         </div>
     </div>

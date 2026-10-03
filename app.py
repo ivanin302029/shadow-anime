@@ -8,7 +8,7 @@ def remove_security_headers(response):
     response.headers['Content-Security-Policy'] = "frame-ancestors 'self' https://onrender.com https://onrender.com;"
     return response
 
-# CATALOGUE AVEC DE VRAIS LIENS VIDÉOS DE TEST HD (SANS YOUTUBE, SANS PUB)
+# REPERTOIRE AVEC DE VRAIS FLUX DE STREAMING HD INDÉPENDANTS
 CATALOGUE_ANIMES = [
     {
         "id": 1, 
@@ -81,7 +81,7 @@ HTML_PLAYER = """
     <title>{{ title }} — Shadow Anime</title>
     <style>
         html, body { background-color: #11141a !important; color: white !important; margin: 0; padding: 0; font-family: 'Arial', sans-serif; overflow-y: auto; min-height: 100vh; }
-        .shadow-player-wrapper { display: flex; justify-content: center; align-items: center; margin: 20px auto; width: 95%; max-width: 900px; }
+        .shadow-player { position: relative; width: 100%; max-width: 850px; margin: 20px auto; aspect-ratio: 16 / 9; background-color: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); }
     </style>
 </head>
 <body>
@@ -89,12 +89,18 @@ HTML_PLAYER = """
         <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold; font-size: 16px;">&larr; Retour au catalogue</a>
         <h1 style="margin: 20px 0 25px 0; font-size: 32px;">{{ title }}</h1>
         
-        <div class="shadow-player-wrapper">
-            <!-- Envoi du lien vidéo au lecteur via le paramètre ?play= -->
+        <!-- TON BLOC D'IFRAME BRUT RESTAURÉ AVEC LA TRANSMISSION DU LIEN VIDEO -->
+        <div class="shadow-player">
             <iframe 
-                src=" https://shdw-player.onrender.com" play={{ video_url }}" 
+                src="https://shdw-player.onrender.com" play={{ video_url }}" 
                 width="100%" 
-                height="650px; border: none; overflow: hidden;">
+                height="100%" 
+                frameborder="0" 
+                scrolling="true" 
+                allowfullscreen="true"
+                webkitallowfullscreen="true" 
+                mozallowfullscreen="true"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
             </iframe>
         </div>
     </div>

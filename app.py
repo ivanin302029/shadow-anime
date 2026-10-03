@@ -13,9 +13,9 @@ def remove_security_headers(response):
 
 # BASE DE DONNÉES DU CATALOGUE
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Chainsaw Man", https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806},
-    {"id": 2, "title": "One Piece", https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806},
-    {"id": 3, "title": "Naruto", https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806}
+    {"id": 1, "title": "Chainsaw Man", "https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806"},
+    {"id": 2, "title": "One Piece", "https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806"},
+    {"id": 3, "title": "Naruto", "https://franime.fr/anime/chainsaw-man?s=1&lang=vf&anime_id=43806"}
 ]
 
 HTML_ACCUEIL = """

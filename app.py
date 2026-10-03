@@ -52,7 +52,7 @@ HTML_PLAYER = """
         <a href="/" style="color: #ff4757; text-decoration: none; font-weight: bold;">← Retour au catalogue</a>
         <h1 style="color: white;">{{ title }}</h1>
         <div class="shadow-player">
-            <iframe src="https://onrender.com?play={{ video_url }}" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+            <iframe src="https://shdw-player.onrender.com" play={{ video_url }}" width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
         </div>
     </div>
 </body>

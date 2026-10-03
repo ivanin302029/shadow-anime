@@ -2,14 +2,14 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES OFFICIELLE DE PRODUCTION - TOUT POINTE SUR TON LECTEUR SHDW-PLAYER
+# Base de données simplifiée pour forcer l'affichage de ton lecteur
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 2, "title": "One Piece", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 3, "title": "Naruto", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 4, "title": "Solo Leveling", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 5, "title": "That Time I Got Reincarnated as a Slime", "image": "https://placehold.co", "lien": "https://onrender.com"},
-    {"id": 6, "title": "Re:Zero", "image": "https://placehold.co", "lien": "https://onrender.com"}
+    {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co"},
+    {"id": 2, "title": "One Piece", "image": "https://placehold.co"},
+    {"id": 3, "title": "Naruto", "image": "https://placehold.co"},
+    {"id": 4, "title": "Solo Leveling", "image": "https://placehold.co"},
+    {"id": 5, "title": "That Time I Got Reincarnated as a Slime", "image": "https://placehold.co"},
+    {"id": 6, "title": "Re:Zero", "image": "https://placehold.co"}
 ]
 
 HTML_ACCUEIL = """
@@ -63,9 +63,9 @@ HTML_PLAYER = """
         
         <section class="shadow-player">
             <div class="video-wrapper">
-                <!-- Chargement direct de ton lecteur shdw-player sans aucun lien externe bloquant -->
+                <!-- Connexion directe et forcée à l'adresse de ton lecteur shdw-player -->
                 <iframe 
-                    src="{{ lien_video }}" 
+                    src="https://onrender.com" 
                     width="100%" 
                     height="100%" 
                     frameborder="0" 
@@ -93,5 +93,4 @@ def accueil():
 def regarder_video(anime_id):
     anime = next((a for a in CATALOGUE_ANIMES if a["id"] == anime_id), None)
     titre_anime = anime["title"] if anime else "Épisode"
-    lien_streaming = anime["lien"] if anime else ""
-    return render_template_string(HTML_PLAYER, title=titre_anime, lien_video=lien_streaming)
+    return render_template_string(HTML_PLAYER, title=titre_anime)

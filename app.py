@@ -2,17 +2,17 @@ from flask import Flask, render_template_string, request
 
 app = Flask(__name__)
 
-# BASE DE DONNÉES SHADOW ANIME - CONFIGURÉE AVEC TES FLUX STREAMING
+# BASE DE DONNÉES SHADOW ANIME
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Naruto", "image": "https://placehold.co", "lien": "https://googleapis.com"},
-    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN", "lien": "https://googleapis.com"},
-    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co", "lien": "https://googleapis.com"},
-    {"id": 4, "title": "One Piece", "image": "https://placehold.co", "lien": "https://googleapis.com"},
-    {"id": 5, "title": "Bleach", "image": "https://placehold.co", "lien": "https://googleapis.com"},
-    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://googleapis.com"},
-    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co", "lien": "https://googleapis.com"},
-    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co", "lien": "https://googleapis.com"},
-    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co", "lien": "https://googleapis.com"}
+    {"id": 1, "title": "Naruto", "image": "https://placehold.co", "lien": "https://onrender.com"},
+    {"id": 2, "title": "Naruto Shippuden", "image": "https://placehold.co+SHIPPUDEN", "lien": "https://onrender.com"},
+    {"id": 3, "title": "Boruto: Naruto Next Generations", "image": "https://placehold.co", "lien": "https://onrender.com"},
+    {"id": 4, "title": "One Piece", "image": "https://placehold.co", "lien": "https://onrender.com"},
+    {"id": 5, "title": "Bleach", "image": "https://placehold.co", "lien": "https://onrender.com"},
+    {"id": 6, "title": "Chainsaw Man", "image": "https://placehold.co", "lien": "https://onrender.com"},
+    {"id": 7, "title": "Jujutsu Kaisen", "image": "https://placehold.co", "lien": "https://onrender.com"},
+    {"id": 8, "title": "Demon Slayer", "image": "https://placehold.co", "lien": "https://onrender.com"},
+    {"id": 9, "title": "Solo Leveling", "image": "https://placehold.co", "lien": "https://onrender.com"}
 ]
 
 HTML_ACCUEIL = """
@@ -50,7 +50,6 @@ HTML_ACCUEIL = """
 </html>
 """
 
-# INTÉGRATION DE TON NOUVEAU CONTENEUR MULTIMÉDIA DE LECTEUR SHDW
 HTML_PLAYER = """
 <!DOCTYPE html>
 <html lang="fr">
@@ -67,18 +66,19 @@ HTML_PLAYER = """
         <h1 style="margin: 20px 0 5px 0; font-size: 32px;">{{ title }}</h1>
         <p style="color: #1e90ff; font-weight: bold; margin: 0 0 20px 0;">Épisode 1 — SHADOW PLAYER</p>
         
-        <!-- TON BLOC D'INTÉGRATION STRUCTURÉ INTERNE ET ADAPTÉ -->
+        <!-- RESTAURATION DE TON IFRAME STRUCTURÉE -->
         <div style="position: relative; width: 100%; max-width: 850px; margin: 0 auto; aspect-ratio: 16 / 9; background-color: #000; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);">
-            <!-- Le lecteur vidéo natif utilise ton lien dynamique de flux direct -->
-            <video 
+            <iframe 
                 src="{{ lien_video }}" 
-                controls 
-                autoplay 
-                muted 
                 width="100%" 
                 height="100%" 
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; border: none; outline: none;">
-            </video>
+                frameborder="0" 
+                scrolling="no" 
+                allowfullscreen="true"
+                webkitallowfullscreen="true" 
+                mozallowfullscreen="true"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            </iframe>
         </div>
     </div>
 </body>

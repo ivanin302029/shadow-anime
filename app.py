@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 # BASE DE DONNÉES SHADOW ANIME - POINTE DIRECTEMENT SUR LE FICHIER HTML DU LECTEUR
 CATALOGUE_ANIMES = [
-    {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co" chainsaw-man?s=1&ep=1&lang=vf&anime_id=43806},
+    {"id": 1, "title": "Chainsaw Man", "image": "https://placehold.co"},
     {"id": 2, "title": "One Piece", "image": "https://placehold.co"},
     {"id": 3, "title": "Naruto", "image": "https://placehold.co"},
     {"id": 4, "title": "Solo Leveling", "image": "https://placehold.co"},
